@@ -1,3 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+
+:root{
+    /*Backgrounds*/
+    --very-dak-desaturated-blue: hsl(222, 26%, 31%);
+    --very-dark-desaturated-blue-tk: hsl(223, 31%, 20%);
+    --very-dark-desaturated-blue-sb: hsl(224, 36%, 15%);
+    /*Keys*/
+    --Desaturated-dark-blue-kb: hsl(225, 21%, 49%);
+    --Desaturated-dark-blue-ks: hsl(224, 28%, 35%);
+    --red: hsl(6, 63%, 50%);
+    --dark-red: hsl(6, 70%, 34%);
+    --Light-grayish-orange: hsl(30, 25%, 89%);
+    --Grayish-orange: hsl(28, 16%, 65%);
+    /*Text*/
+    --Very-dark-grayish-blue: hsl(221, 14%, 31%);
+    --White: white;
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body,
+.btn{
+    font-family: 'Spartan', sans-serif;
+}
+
+.container{
+    background-color: var(--very-dak-desaturated-blue);
+}
+
+.calc-display{
+    background-color: var(--very-dark-desaturated-blue-sb);
+}
+
+.grid-buttons{
+    background-color: var(--very-dark-desaturated-blue-tk);
+}
+
+.btn{
+    color:var(--Very-dark-grayish-blue);
+    background-color: var(--Light-grayish-orange);
+    border:none;
+    padding:.4em .7em;
+    border-radius: 8px;
+    box-shadow: 0 4px var(--Grayish-orange);
+}
+
+.btn,
+.display-input {
+    font-size: 2rem;
+}
+
+h1,
+.display-input,
+.display-result{
+    color: var(--White);
+}
+
+.del,
+.reset,
+.equal {
+    font-size: 1.2rem;
+    color: var(--White);
+}
+
+.del,
+.reset{
+    background-color: var(--Desaturated-dark-blue-kb);
+    box-shadow: 0 4px var(--Desaturated-dark-blue-ks);
+}
+
+.equal{
+    background-color: var(--red);
+    box-shadow: 0 4px var(--dark-red);
+}
+
+
 .attribution { 
     font-size: 11px; text-align: center; 
 }
