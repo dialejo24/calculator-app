@@ -1,29 +1,31 @@
 const GRID_BUTTONS = document.querySelector(".grid-buttons");
+const displayer = document.querySelector(".display-input");
 let stack = [];
 let digits = "";
-let decimalPoint = true;
 
 window.addEventListener("keydown", e => {
     const button = document.querySelector(`button[data-key="${e.key}"]`);
     if (button != null) {
         makeCalcWork(button.attributes[0].value);
-        console.log(stack + " - " + digits);
+        console.log(stack + " : " + digits);
+        displayer.textContent = stack.join(" ") + " " + digits;
     }
 });
 
 GRID_BUTTONS.addEventListener("click", e => {
     if (e.target.attributes[0].name == "data-key") {
         makeCalcWork(e.target.attributes[0].value);
-        console.log(stack + " - " + digits);
+        console.log(stack + " : " + digits);
+        displayer.textContent = stack.join(" ") + " " + digits;
     }
 });
 
 function makeCalcWork(input) {
     if (input == "*" || input == "/" || input == "+" || input == "-") {
-        if (digits.length > 0 && Number(digits) != NaN) {
+        if (digits.length > 0 && Number(digits).toString() != "NaN") {
+            console.log(Number(digits));
             stack.push(digits);
             digits = "";
-            decimalPoint = true;
 
             if (stack.length == 3) {
                 calc();
@@ -31,21 +33,24 @@ function makeCalcWork(input) {
 
             stack.push(input);
 
+        } else if ((stack[1] == "*" || stack[1] == "/") && input == "-") {
+            digits += input;
+
         } else if (stack.length > 0) {
             stack[1] = input;
 
-        } else if (digits.length == 0 && (input == "-" || input == "+")) {
+        } else if (digits.length == 0 && input == "-") {
             digits += input;
         }
 
     } else if(input == "del") {
         stack = [];
-        operand = "";
+        digits = "";
 
     } else if (input == ".") {
-        if (decimalPoint == true) {
+        if (digits.indexOf(".") == -1) {
             digits += ".";
-            decimalPoint = false; 
+            
         }
 
     } else if (input == "Enter") {
@@ -71,6 +76,10 @@ function makeCalcWork(input) {
         }
 
     } else {
+        if (stack.length == 1) {
+            stack.pop();
+        }
+
         digits += input;
     }
 }
