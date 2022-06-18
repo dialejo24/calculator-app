@@ -50,7 +50,7 @@ body,
     background-color: var(--very-dark-desaturated-blue-sb);
     margin-block: 2em 1.5em;
     text-align: right;
-    padding: 1.7em 1.5em;
+    padding: 2em 1.5em 1.7em;
     border-radius: 10px;
 }
 
@@ -85,12 +85,11 @@ body,
     font-size: 2rem;
 }
 .display-input{
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 h1,
-.display-input,
-.display-result{
+.display-input{
     color: var(--White);
 }
 

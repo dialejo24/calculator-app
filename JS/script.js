@@ -1,5 +1,6 @@
 const GRID_BUTTONS = document.querySelector(".grid-buttons");
 const displayer = document.querySelector(".display-input");
+const span = document.getElementById("display-input");
 let stack = [];
 let digits = "";
 
@@ -7,16 +8,15 @@ window.addEventListener("keydown", e => {
     const button = document.querySelector(`button[data-key="${e.key}"]`);
     if (button != null) {
         makeCalcWork(button.attributes[0].value);
-        console.log(stack + " : " + digits);
-        displayer.textContent = stack.join(" ") + " " + digits;
+        display();
+        
     }
 });
 
 GRID_BUTTONS.addEventListener("click", e => {
     if (e.target.attributes[0].name == "data-key") {
         makeCalcWork(e.target.attributes[0].value);
-        console.log(stack + " : " + digits);
-        displayer.textContent = stack.join(" ") + " " + digits;
+        display();
     }
 });
 
@@ -48,20 +48,18 @@ function makeCalcWork(input) {
         digits = "";
 
     } else if (input == ".") {
-        if (digits.indexOf(".") == -1) {
+        if (stack.length == 1 && digits.length == 0) {
+
+        } else if (digits.indexOf(".") == -1) {
             digits += ".";
-            
         }
 
     } else if (input == "Enter") {
         if (Number(digits) != NaN && stack.length == 2 && digits.length > 0) {
             stack.push(digits);
             digits = "";
-        }
-
-        if (stack.length == 3) {
             calc();
-        }
+        }      
 
     } else if (input == "Backspace") {
         if (digits.length > 0) {
@@ -69,10 +67,8 @@ function makeCalcWork(input) {
 
         } else if (stack.length == 2) {
             stack.pop();
-
-        } else if (stack.length == 1) {
             digits = stack.pop() + "";
-            digits = digits.slice(0, digits.length - 1);
+
         }
 
     } else {
@@ -84,11 +80,29 @@ function makeCalcWork(input) {
     }
 }
 
+function display() {
+    let display = stack.join(" ") + " " + digits;
+
+    if (display.includes("NaN") || display.includes("null")) {
+        alert("Error!");
+        display = 0;
+    } else if (display == " ") {
+        display = 0;
+    }
+
+    span.textContent = display;
+
+}
+
 function calc() {
     let operand2 = stack.pop();
     let operator = stack.pop();
     let operand1 = stack.pop();
     let result = operate(operator, operand1, operand2);
+    if (result == "error") {
+        alert("Error! you can't divide by 0");
+        return;
+    }
     stack.push(result);
     
 }
@@ -122,5 +136,5 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return b != 0 ? a / b : null;
+    return b != 0 ? a / b : "error";
 }
