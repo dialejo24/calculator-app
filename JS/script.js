@@ -23,7 +23,6 @@ GRID_BUTTONS.addEventListener("click", e => {
 function makeCalcWork(input) {
     if (input == "*" || input == "/" || input == "+" || input == "-") {
         if (digits.length > 0 && Number(digits).toString() != "NaN") {
-            console.log(Number(digits));
             stack.push(digits);
             digits = "";
 
@@ -82,6 +81,7 @@ function makeCalcWork(input) {
 
 function display() {
     let display = stack.join(" ") + " " + digits;
+    console.log(display);
 
     if (display.includes("NaN") || display.includes("null")) {
         alert("Error!");
@@ -91,6 +91,11 @@ function display() {
     }
 
     span.textContent = display;
+
+    while (span.offsetWidth > displayer.offsetWidth) {
+        display = display.slice(1, );
+        span.textContent = display;
+    }
 
 }
 
@@ -102,6 +107,8 @@ function calc() {
     if (result == "error") {
         alert("Error! you can't divide by 0");
         return;
+    } else if (result >= 10e13) {
+        result = result.toExponential(10);
     }
     stack.push(result);
     
