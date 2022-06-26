@@ -83,6 +83,31 @@ body,
     max-width: 38em;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+}
+.theme {
+    display: flex;
+    align-items: flex-end;
+    gap:1em;
+    font-size: .9rem;
+    font-weight: normal;
+}
+.theme_number {
+    display: flex;
+    justify-content: space-between;
+    margin-inline: .3em;
+}
+.theme1 {
+    color: var(--White);
+}
+.theme2 {
+    color: var(--very-dark-grayish-yellow);
+}
+.theme3 {
+    color: var(--light-yellow);
+}
 .calc-display_theme1 {
     background-color: var(--very-dark-desaturated-blue-sb);
 }
@@ -205,6 +230,44 @@ body,
     background-color: var(--pure-cyan);
     box-shadow: 0 4px var(--soft-cyan);
     color:var(--very-dark-blue);
+}
+
+.toggle {
+    width:4.5em;
+    height:1.5em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position:relative; 
+    border-radius: 15px;
+    cursor: pointer;
+}
+.toggle_theme1 {
+    background-color: var(--very-dark-desaturated-blue-tk);
+}
+.toggle_theme2 {
+    background-color: var(--grayish-red);
+}
+.toggle_theme3 {
+    background-color: var(--very-dark-violet-kb);
+}
+.point {
+    width: 0.9em;
+    height:0.9em;
+    border-radius: 100%;
+    position: absolute;
+    top:25%;
+    transition: transform .5s ease-in-out;
+    left:.3em;
+    top:.26em;
+}
+.point_theme1 {
+    background-color: var(--red);
+}
+.point_theme2 {
+    background-color: var(--orange);
+}
+.point_theme3 {
+    background-color: var(--pure-cyan);
 }
 
 @media(min-width:750px) {
