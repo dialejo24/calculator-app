@@ -133,6 +133,8 @@ function calc() {
         return;
     } else if (result >= 10e13) {
         result = result.toExponential(10);
+    } else if (result.toString().length > 14) {
+        result = result.toFixed(3);
     }
     stack.push(result);
     
