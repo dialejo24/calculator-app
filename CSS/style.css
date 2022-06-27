@@ -62,10 +62,10 @@
 .body_theme3 {
     background-color: var(--very-dark-violet);
 }
-body{
-    background-color: var(--very-dak-desaturated-blue);
-}
 
+body{
+    transition: all .3s ease-in-out;
+}
 body,
 .btn{
     font-family: 'Spartan', sans-serif;
@@ -91,13 +91,16 @@ header {
     display: flex;
     align-items: flex-end;
     gap:1em;
-    font-size: .9rem;
     font-weight: normal;
+}
+.theme p {
+    font-size: .8rem;
 }
 .theme_number {
     display: flex;
     justify-content: space-between;
-    margin-inline: .3em;
+    margin-inline: .6em;
+    font-size: .8rem;
 }
 .theme1 {
     color: var(--White);
@@ -154,8 +157,8 @@ header {
 }
 .btn_theme2 {
     color:var(--very-dark-grayish-yellow);
-    background-color: var(--dark-moderate-cyan);
-    box-shadow: 0 4px var(--very-dark-cyan);
+    background-color: var(--light-grayish-yellow);
+    box-shadow: 0 4px var(--dark-grayish-orange);
 }
 .btn_theme3 {
     color: var(--light-yellow);
@@ -213,7 +216,7 @@ header {
 .reset_theme3 {
     background-color: var(--dark-violet);
     box-shadow: 0 4px var(--vivid-magenta);
-    color:var(--very-dark-blue);
+    color:var(--White);
 }
 
 .equal_theme1 {
