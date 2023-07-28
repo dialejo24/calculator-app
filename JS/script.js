@@ -1,3 +1,5 @@
+import calculate from './arithmeticOperations';
+
 const GRID_BUTTONS = document.querySelector(".grid-buttons");
 const displayer = document.querySelector(".display-input");
 const span = document.getElementById("display-input");
@@ -71,14 +73,12 @@ function makeCalcWork(input) {
         digits = "";
 
     } else if (input == ".") {
-        if (stack.length == 1 && digits.length == 0) {
-
-        } else if (digits.indexOf(".") == -1) {
+        if (digits.indexOf(".") == -1) {
             digits += ".";
         }
 
     } else if (input == "Enter") {
-        if (Number(digits) != NaN && stack.length == 2 && digits.length > 0) {
+        if (!isNaN(digits) && stack.length == 2 && digits.length > 0) {
             stack.push(digits);
             digits = "";
             calc();
@@ -138,38 +138,6 @@ function calc() {
     }
     stack.push(result);
     
-}
-
-function operate(operator, a, b) {
-    switch(operator) {
-        case "+":
-            return add(Number(a), Number(b));
-        case "-":
-            return subtract(a, b);
-        case "*":
-            return multiply(a, b);
-        case "/":
-            return divide(a, b);
-        default:
-            return null;
-    }
-}
-
-
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a  - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return b != 0 ? a / b : "error";
 }
 
 function theme1() {
