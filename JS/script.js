@@ -1,4 +1,4 @@
-import calculate from './arithmeticOperations';
+import calculate from './mathOperations';
 
 const GRID_BUTTONS = document.querySelector(".grid-buttons");
 const displayer = document.querySelector(".display-input");
@@ -127,7 +127,7 @@ function calc() {
     let operand2 = stack.pop();
     let operator = stack.pop();
     let operand1 = stack.pop();
-    let result = operate(operator, operand1, operand2);
+    let result = calculate(operator, operand1, operand2);
     if (result == "error") {
         alert("Error! you can't divide by 0");
         return;
