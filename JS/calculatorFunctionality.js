@@ -66,13 +66,12 @@ function setOperator(operator) { //pushes operator to stack or sets it as an ope
 
         stack.push(operator);
 
-    } else if ((stack[1] != "+" && operator == "-") || (operand.length == 0 && operator == "-")) {
-        operand += operator;
-
     } else if (stack.length > 0) {
         stack[1] = operator;
 
-    }
+    } else if (((stack[1] == "*" || stack[1] == "/") && operator == "-") || (operand.length == 0 && operator == "-")) {
+        operand += operator;
+    }    
 }
 
 function operate() {

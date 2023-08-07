@@ -42,7 +42,7 @@ toggle.addEventListener("click", e => {
         togglePoint.style = "transform: translateX(0px)";
         changeTheme(1);
     }
-})
+});
 
 function displayUserInput() { //displays user input and operations result
     let userInput = getUserInput();
