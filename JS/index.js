@@ -1,8 +1,8 @@
-import makeCalcWork from "./calculatorFunctionality";
+import {makeCalcWork, getUserInput} from "./calculatorFunctionality";
 
 const GRID_BUTTONS = document.querySelector(".grid-buttons");
 const displayer = document.querySelector(".display-input");
-const display_content = document.getElementById("display-input");
+const contentToDisplay = document.getElementById("display-input");
 let theme = document.querySelector(".theme");
 let toggle = document.querySelector(".toggle");
 let togglePoint = document.querySelector(".point");
@@ -45,7 +45,7 @@ toggle.addEventListener("click", e => {
 })
 
 function displayUserInput() { //displays user input and operations result
-    let userInput = stack.join(" ") + " " + digits;
+    let userInput = getUserInput();
 
     if (userInput.includes("NaN") || userInput.includes("null")) {
         alert("Error!");
@@ -54,13 +54,8 @@ function displayUserInput() { //displays user input and operations result
         userInput = 0;
     }
 
-    display_content.textContent = userInput;
-
-    while (display_content.offsetWidth > displayer.offsetWidth) {
-        userInput = userInput.slice(1, );
-        display_content.textContent = userInput;
-    }
-
+    contentToDisplay.textContent = userInput;
+    preventOverflow(userInput);
 }
 
 
@@ -84,5 +79,12 @@ function changeTheme(themeId) { //changes the calculator and background theme
         }
         
         buttons[i].className = `btn btn_theme${themeId}`;
+    }
+}
+
+function preventOverflow(userInput) {
+    while (contentToDisplay.offsetWidth > displayer.offsetWidth) {
+        userInput = userInput.slice(1, );
+        contentToDisplay.textContent = userInput;
     }
 }

@@ -1,63 +1,38 @@
 import calculate from './mathOperations';
 
-let stack = []; //stores the user input and results of math operations
-let digits = "";
+let stack = []; //stores operands, operators and results of math operations
+let operand = ""; //stores the digits of an operand
 
-export default function makeCalcWork(input) {
+function makeCalcWork(input) {
     if (input == "*" || input == "/" || input == "+" || input == "-") {
-        if (digits.length > 0 && Number(digits).toString() != "NaN") {
-            stack.push(digits);
-            digits = "";
-
-            if (stack.length == 3) {
-                pushResultToStack();
-            } 
-
-            stack.push(input);
-
-        } else if ((stack[1] == "*" || stack[1] == "/") && input == "-") {
-            digits += input;
-
-        } else if (stack.length > 0) {
-            stack[1] = input;
-
-        } else if (digits.length == 0 && input == "-") {
-            digits += input;
-        }
+        setOperator(input);
 
     } else if (input == "del") {
         stack = [];
-        digits = "";
+        operand = "";
 
     } else if (input == ".") {
-        if (digits.indexOf(".") == -1) {
-            digits += ".";
+        if (operand.indexOf(".") == -1) {
+            operand += ".";
         }
 
     } else if (input == "Enter") {
-        if (!isNaN(digits) && stack.length == 2 && digits.length > 0) {
-            stack.push(digits);
-            digits = "";
-            pushResultToStack();
-        }      
+        operate();
 
     } else if (input == "Backspace") {
-        if (digits.length > 0) {
-            digits = digits.slice(0, digits.length - 1);
-
-        } else if (stack.length == 2) {
-            stack.pop();
-            digits = stack.pop() + "";
-
-        }
+       removeDigitOrOperator();
 
     } else {
         if (stack.length == 1) {
             stack.pop();
         }
 
-        digits += input;
+        appendDigitToOperand(input);
     }
+}
+
+function getUserInput() {
+    return stack.join(" ") + " " + operand;
 }
 
 function pushResultToStack() { //pushes the operation's result to the stack
@@ -72,10 +47,55 @@ function pushResultToStack() { //pushes the operation's result to the stack
     }
     
     if (result >= 10e13) {
-        result = result.toExponential(10);
-    } else if (result.toString().length > 14) {
+        result = result.toExponential(9);
+    } else if (result.toString().length > 13) {
         result = result.toFixed(3);
     }
     stack.push(result);
     
 }
+
+function setOperator(operator) { //pushes operator to stack or sets it as an operand's sign if equals '-'
+    if (operand.length > 0 && !isNaN(Number(operand))) {
+        stack.push(operand);
+        operand = "";
+
+        if (stack.length == 3) {
+            pushResultToStack();
+        } 
+
+        stack.push(operator);
+
+    } else if ((stack[1] != "+" && operator == "-") || (operand.length == 0 && operator == "-")) {
+        operand += operator;
+
+    } else if (stack.length > 0) {
+        stack[1] = operator;
+
+    }
+}
+
+function operate() {
+    if (!isNaN(operand) && stack.length == 2 && operand.length > 0) {
+        stack.push(operand);
+        operand = "";
+        pushResultToStack();
+    }  
+}
+
+function removeDigitOrOperator() {
+    if (operand.length > 0) {
+        operand = operand.slice(0, operand.length - 1);
+
+    } else if (stack.length == 2) {
+        stack.pop();
+        operand = stack.pop() + "";
+
+    }
+}
+
+function appendDigitToOperand(digit) {
+    operand += digit;
+}
+
+export {makeCalcWork, getUserInput};
