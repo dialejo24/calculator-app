@@ -1,4 +1,5 @@
 import {makeCalcWork, getUserInput} from "./calculatorFunctionality";
+import './style.css';
 
 const GRID_BUTTONS = document.querySelector(".grid-buttons");
 const displayer = document.querySelector(".display-input");
